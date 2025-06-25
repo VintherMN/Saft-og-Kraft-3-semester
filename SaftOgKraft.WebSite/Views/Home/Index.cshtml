@@ -1,0 +1,38 @@
+﻿@using SaftOgKraft.WebSite.ApiClient.DTOs
+@model IEnumerable<ProductDto>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section id="section-hero">
+    
+    <div class="hero-image">
+        <img src="~/lib/images/Saftogkraft.png" alt="This is a hero banner"/>
+        <div class="text-center">
+            <section id="section-products">
+                <h2>Most popular products</h2>
+                <br />
+                <div class="product-list">
+                  @foreach (var item in Model)
+                  {
+                     <div class="product-item">
+                         <img src="@item.PictureUrl" alt="@item.Name" class="product-image" />
+                         <h3>@item.Name</h3>
+                         <br />
+                         <p>@item.Description</p>
+                         <br />
+                         <p>Price: $@item.Price</p>
+                         <br />
+                         <div class="cart-btn">
+                                <script src="~/js/site.js"></script>
+                         <a class="btn btn-primary" onclick="addToCart(@item.Id, 1)" href="@Url.Action("Add", "Cart", new { id = item.Id, quantity = 1 })">Add To Cart</a>
+                         </div>
+                     </div>
+                  }
+                </div>   
+            </section>
+        </div>
+    </div>
+</section>
+
